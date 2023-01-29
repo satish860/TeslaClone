@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 
   titles: {
-    marginTop: 40,
+    marginTop: "30%",
     fontSize: 40,
     fontWeight: "500",
   },
