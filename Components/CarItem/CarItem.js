@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import StyledButton from "../Button/StyledButton";
 
 function CarItem() {
   return (
@@ -10,6 +11,7 @@ function CarItem() {
       ></ImageBackground>
       <Text style={styles.titles}>Model S</Text>
       <Text style={styles.subTitle}>Starting at $64290</Text>
+      <StyledButton></StyledButton>
     </View>
   );
 }
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
   },
-
+   
   titles: {
     marginTop: 40,
     fontSize: 40,
