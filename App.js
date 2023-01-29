@@ -1,14 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import CarItem from './Components/CarItem/CarItem';
-
+import { StatusBar } from "expo-status-bar";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import CarItem from "./Components/CarItem/CarItem";
+import CarList from "./Components/CarList/CarList";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <CarItem text="Model S" 
-        subtext="Starting at $64290"
-        imagesource={require("./assets/images/ModelS.jpeg")}/>
+      <CarList />
       <StatusBar style="auto" />
     </View>
   );
@@ -17,9 +15,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
