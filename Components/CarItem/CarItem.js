@@ -11,7 +11,10 @@ function CarItem() {
       ></ImageBackground>
       <Text style={styles.titles}>Model S</Text>
       <Text style={styles.subTitle}>Starting at $64290</Text>
-      <StyledButton></StyledButton>
+      <View style={styles.buttonContainer}>
+        <StyledButton text="Custom order" type="primary"></StyledButton>
+        <StyledButton text="Existing Inventory" type="secondary"></StyledButton>
+      </View>
     </View>
   );
 }
@@ -24,7 +27,7 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
   },
-   
+
   titles: {
     marginTop: 40,
     fontSize: 40,
@@ -39,5 +42,10 @@ const styles = StyleSheet.create({
     height: "100%",
     position: "absolute",
     resizeMode: "contain",
+  },
+  buttonContainer: {
+    width: "100%",
+    position: "absolute",
+    bottom: 50,
   },
 });
