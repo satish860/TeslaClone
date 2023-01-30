@@ -6,16 +6,14 @@ import {
 } from "react-native";
 
 function StyledButton(props) {
-  const { text,type } = props;
+  const { text,type,onpress } = props;
   const backgroundColor = type=='primary'?'white':'black'
   const textColor = type == 'primary'? '#171A20' : "#FFFFFF"
   return (
     <View style={styles.container}>
       <Pressable
         style={[styles.button,{backgroundColor:backgroundColor}]}
-        onPress={() => {
-          console.warn("You clicked on Custom order");
-        }}
+        onPress={() => onpress()}
       >
         <Text style={[styles.textItem,{color:textColor}]}>{text}</Text>
       </Pressable>

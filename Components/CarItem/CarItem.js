@@ -1,9 +1,15 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View,Dimensions } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+} from "react-native";
 import StyledButton from "../Button/StyledButton";
 
 function CarItem(props) {
-  const {text,subtext,imagesource,taglineCTA} = props.car
+  const { text, subtext, imagesource, taglineCTA } = props.car;
   return (
     <View style={styles.carcontainer}>
       <ImageBackground
@@ -12,12 +18,19 @@ function CarItem(props) {
       ></ImageBackground>
       <Text style={styles.titles}>{text}</Text>
       <Text style={styles.subTitle}>
-        {subtext} {' '}
-        <Text style={styles.taglineCTA}>{taglineCTA}</Text>
+        {subtext} <Text style={styles.taglineCTA}>{taglineCTA}</Text>
       </Text>
       <View style={styles.buttonContainer}>
-        <StyledButton text="Custom order" type="primary"></StyledButton>
-        <StyledButton text="Existing Inventory" type="secondary"></StyledButton>
+        <StyledButton
+          text="Custom order"
+          type="primary"
+          onpress={() => console.warn("I am custom order")}
+        ></StyledButton>
+        <StyledButton
+          text="Existing Inventory"
+          type="secondary"
+          onpress={() => console.warn("You pressed Extended Inventory")}
+        ></StyledButton>
       </View>
     </View>
   );
@@ -41,8 +54,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#5c5e62",
   },
-  taglineCTA:{
-    textDecorationLine:"underline"
+  taglineCTA: {
+    textDecorationLine: "underline",
   },
   image: {
     width: "100%",
@@ -55,5 +68,4 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 50,
   },
-
 });
