@@ -102,7 +102,7 @@ The code contains a text component for the title and subtitle. The output will l
 
 There are a couple of challenges
 
-1. Content is centred. Ideally, it should be at the Top but it's centred.
+1. Content is centered. Ideally, it should be at the Top but it's centered.
     
 2. The text component is not looking like the mockup.
     
@@ -129,7 +129,7 @@ You can style the carItemContainer using the following Style
   }
 ```
 
-So that we can see the content rise to the top of the screen, I have increased the width and height to full screen. Aligning things in the centre of the screen and shifting the content down a bit calls for a top margin.
+So that we can see the content rise to the top of the screen, I have increased the width and height to full screen. Aligning things in the center of the screen and shifting the content down a bit calls for a top margin.
 
 Now let's apply the font changes to the text component.
 
@@ -177,7 +177,7 @@ Now we have the images. Let's create a background image for the application.
             source={require('./assets/images/ModelS.jpeg')}/>
 ```
 
-Given that the picture needs to fill the whole display. Therefore, the aesthetic should be consistent.
+given that the picture needs to fill the whole display. Therefore, the aesthetic should be consistent.
 
 ```javascript
 imagestyles:{
@@ -192,9 +192,139 @@ That should show you the screen
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1675090060215/c271d2cb-3cce-449b-bc15-4926c7ceaab8.png align="center")
 
-That's fantastic, but to reuse the same component for various car Items, we'll need to transfer the code out of the App.js and into Components.
+That's fantastic, but to reuse the same component for various car items, we'll need to transfer the code out of the app.js and into components.
 
-To move
+Let's start by adding a component folder to the root of the project.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1675300584397/a40fd8cb-a037-4727-b9bf-c222f2bdef12.png align="center")
+
+Create a subfolder called CarItem and a CarItem.js file. A function that accepts arguments and returns Markup is all that a component is.
+
+In this case, I just move the code from App.js to the carItem.js file
+
+```javascript
+import { View, Text,ImageBackground, StyleSheet } from 'react-native'
+import React from 'react'
+
+const CarItem = () => {
+  return (
+    <View>
+       <View style={styles.carItemContainer}>
+        <ImageBackground 
+            style={styles.imagestyles}
+            source={require('../../assets/images/ModelS.jpeg')}/>
+        <Text style={styles.titles}>Model S</Text>
+        <Text style={styles.subTitle}>Starting at $69240</Text>
+      </View>
+    </View>
+  )
+}
+
+export default CarItem
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    carItemContainer:{
+      width:"100%",
+      height:"100%",
+      alignItems: "center",
+    },
+    titles: {
+      marginTop: "30%",
+      fontSize: 40,
+      fontWeight: "500",
+    },
+    subTitle: {
+      fontSize: 16,
+      color: "#5c5e62",
+    },
+    imagestyles:{
+      width:'100%',
+      height:'100%',
+      position:"absolute",
+      resizeMode:"contain"
+    }
+  });
+```
+
+Note: I have to change the image background source.
+
+I can now reference the CarItem in App.js
+
+```javascript
+import { StatusBar } from "expo-status-bar";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import CarItem from "./components/CarItem/Caritem";
+
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <CarItem/>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  }
+});
+```
+
+### Reusability
+
+Even though we moved the component out of App.js, it can't be used again because the background image for the title and subtitle are hard-coded.
+
+Let's use props to make that customizable.
+
+```javascript
+const CarItem = (props) => {
+  const { text, subtext, imagesource } = props.car;
+  return (
+    <View>
+       <View style={styles.carItemContainer}>
+        <ImageBackground 
+            style={styles.imagestyles}
+            source={imagesource}/>
+        <Text style={styles.titles}>{text}</Text>
+        <Text style={styles.subTitle}>{subtext}</Text>
+      </View>
+    </View>
+  )
+}
+```
+
+Props (arguments) are the way to get input to the component. So the car item component is reusable for many cars.
+
+Now the App.js will look much simple
+
+```javascript
+export default function App() {
+ const car =  {
+    text: "Model S",
+    subtext: "Starting at $69,420",
+    imagesource: require("./assets/images/ModelS.jpeg"),
+  };
+  return (
+    <View style={styles.container}>
+      <CarItem car={car}/>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+```
+
+Now that we have done the major component of the application. Lets move the Button component.
 
 # Button Component
 
